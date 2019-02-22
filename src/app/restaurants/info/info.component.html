@@ -1,0 +1,32 @@
+<div *ngIf="collectionID.length">
+	<h4>Choose a restaurant for more info</h4>
+	<hr>
+	<div class="alert alert-info" *ngIf="resultsFound">
+		{{resultsFound}} results found
+	</div>
+	<div class="row">
+		<div class="col-md-6 my-2" *ngFor="let res of restaurants">
+			<div class="float-right">
+				<span class="badge badge-info" style="font-size: 16px;">{{res.restaurant.user_rating.aggregate_rating}}</span>
+			</div>
+			<div class="float-left">
+				<a href={{res.restaurant.url}} target="_blank" rel="noopener noreferrer">
+					<h4>{{res.restaurant.name}}</h4>
+				</a>
+				
+				<p class="mt-1"><i class="map marker alternate icon" style="color: red;"></i> <span class="text-muted">{{res.restaurant.location.address}}</span></p>
+				<p *ngIf="res.restaurant.cuisines.length" style="color: orangered;"><i class="utensils icon"></i><span class="text-muted">{{res.restaurant.cuisines}}</span></p>
+				<p *ngIf="res.restaurant.average_cost_for_two">Average Cost for two: {{res.restaurant.currency}}{{res.restaurant.average_cost_for_two}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="text-center my-2">
+	<button class="btn btn-primary" (click)="fetchMoreRestaurants()" *ngIf="resultsFound > 20" [disabled]="resultsDisplayed === resultsFound">
+	More
+	</button>
+</div>
+
+<div class="alert alert-warning" *ngIf="errMsg.length">
+	{{errMsg}}
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row" *ngIf="editMode">
+		<div class="col-md-8 mt-2">
+			<h3>Pick a Country</h3>
+			<input type="text" [(ngModel)]="filteredCountries" class="ml-2 rounded" style="display: inline-block;"/>
+			<div class="row" style="overflow-y: scroll; max-height: 200px">
+					<div *ngFor="let choice of countries | filter:filteredCountries:'name'"
+				class="col-md-4 my-2 col-sm-6">
+					<img src={{choice.url}} alt={{choice.name}} style="height: 16px;">
+					<a [routerLink]="['/news']" 
+					[queryParams]="{country: choice.name, code: choice.code, category: category}"
+					(click)="selectCountry(choice)"
+					>
+						{{choice.name}}
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3 text-center mt-2">
+			<h5>Category</h5>
+			<hr>
+			<div *ngFor="let option of categories">
+				<a [routerLink]="['/news']" 
+				[queryParams]="{country: countryName, code: country, category: option}"
+				(click)="selectCategory(option)" style="font-size: 16px;">
+					{{option | uppercase}}
+				</a>
+			</div>
+		</div>
+		<hr>
+	</div>
+			
+	<h3 class="mt-3">Top Headlines <span class="text-muted">for {{countryName}} on {{category}}</span></h3>
+	<div class="row">
+		<div class="col-md-6" *ngFor="let news of latestNews ;let count = index">
+			<a href={{news.url}}  target="_blank" rel="noopener noreferrer" *ngIf="count < numOfNewsShown">
+				<img src={{news.urlToImage}} alt="" style="z-index: -1; width: 100%; height: auto"/>
+				<blockquote class="blockquote">
+					<h4>{{news.title}}</h4>
+					<p>{{news.description}}</p>
+					<footer class="blockquote-footer">{{news.author}}</footer>
+				</blockquote>
+				<div class="float-right">
+					{{news.publishedAt | date}}
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="text-center my-3">
+		<button class="btn btn-primary px-3 py-2 mr-2" (click)="showLessNews()" [disabled]="numOfNewsShown <= 10">Less</button>
+		<button class="px-3 py-2 btn btn-primary" (click)="showMoreNews()" [disabled]="numOfNewsShown > latestNews.length">More</button>
+	</div>
+</div>
+<div class="alert alert-warning" *ngIf="!latestNews.length">
+		Failed to get news
+</div>

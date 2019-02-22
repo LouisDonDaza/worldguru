@@ -1,0 +1,84 @@
+<div class="container">
+	<div>
+		<div class="row">
+			<h3>1. Select a Country: <span class="text-muted">{{selectedCountry}}</span></h3>
+			<input type="text" [(ngModel)]="filteredCountries" class="ml-2 rounded"/>
+		</div>
+		
+		<hr>
+			<div class="row" style="overflow-y: scroll; max-height: 200px">
+				<div *ngFor="let choice of countries | filter:filteredCountries:'name'"
+			class="col-md-4 my-2 col-sm-6">
+				<img src={{choice.url}} alt={{choice.name}} style="height: 16px;">
+				<a [routerLink]="['/weather']" 
+				[queryParams]="{country: choice.name}"
+				(click)="selectCountry(choice.name)"
+				>
+					{{choice.name}}
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div *ngIf="selectedCountry.length">
+		<div class="row">
+			<h3>2. Select a State: <span class="text-muted">{{selectedState}}</span></h3>
+			<input type="text" [(ngModel)]="filteredStates" class="ml-2 rounded"/>
+		</div>
+		
+		<hr>
+		<div class="row text-center" style="overflow-y: scroll; max-height: 200px">
+			<div *ngFor="let stateChoice of states | filter:filteredStates:'state'"
+			class="col-md-4 my-2 col-sm-6">
+				<a [routerLink]="['/weather']" 
+				[queryParams]="{country: selectedCountry, state: stateChoice.state }"
+				(click)="selectState(stateChoice.state)"
+				>
+					{{stateChoice.state}}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="selectedState.length">
+		<div class="row">
+			<h3>3. Select a City: <span class="text-muted">{{selectedCity}}</span></h3>
+			<input type="text" [(ngModel)]="filteredCities" class="ml-2 rounded"/>
+		</div>
+		
+		<hr>
+		<div class="row text-center" style="overflow-y: scroll; max-height: 200px">
+			<div class="col-md-4 my-1 col-sm-6" *ngFor="let cityOption of cities | filter:filteredCities:'city'">
+				<a [routerLink]="['/weather']" [queryParams]="{country: selectedCountry, state: selectedState, city: cityOption.city}" (click)="selectCity(cityOption.city)">
+					{{cityOption.city}}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="alert alert-warning" role="alert" *ngIf="errorMsg.length">{{errorMsg}}</div>
+	<div *ngIf="selectedCity.length" class="card text-center" style="margin: 0 auto; max-width: 400px;">
+		<img src={{getImgURL(cityData.weather.ic)}} class="card-img-top" alt="...">
+		<div class="card-body">
+			<h3 class="card-title">
+				Location: <span class="text-muted">{{selectedCity}}, {{selectedCountry}}</span>
+			</h3>
+			<h4 class="card-title">
+				Temperature <span class="text-muted">{{cityData.weather.tp}}°C</span>
+			</h4>
+			<p class="card-text">
+				Humidity: <span class="text-muted">{{cityData.weather.hu}}%</span>
+			</p>
+			<p class="card-text">
+				Atm pressure: <span class="text-muted">{{cityData.weather.pr}} hPa</span>
+			</p>
+			<p class="card-text">
+				Wind Speed: <span class="text-muted">{{cityData.weather.ws}}m/s</span>
+			</p>
+			<p class="card-text">
+				Wind Direction: <span class="text-muted">{{cityData.weather.wd}}°</span>
+			</p>
+			<p class="card-text">
+				AQI: <span class="text-muted">{{cityData.pollution.aqius}} (based on USA standard)</span>
+			</p>
+		</div>
+	</div>
+</div>

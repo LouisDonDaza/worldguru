@@ -1,0 +1,38 @@
+<div class="row">
+	<h4>Enter a City</h4>
+	<input type="text" class=" ml-2 rounded" (keypress)="onEnterCity($event)">
+</div>
+<hr>
+
+<div *ngIf="querySuggestions.length">
+	<h4>Pls select the specific City you meant</h4>
+	<hr>
+	<div class="row">
+		<div class="col-md-4 my-2" *ngFor="let city of querySuggestions">
+			<a [routerLink]="['/restaurants/collections']" [queryParams]="{cityID: city.id}" (click)="onSelectCity(city.id)">
+				<img src={{city.country_flag_url}} alt={{city.name}} style="height: 25px;">
+				{{city.name}}
+			</a>
+		</div>
+	</div>
+</div>
+<div class="my-3" *ngIf="cityID">
+	<h4>Choose your type of Restaurant from a Collection</h4>
+	<hr>
+	<div class="row" style="overflow-y: scroll; height: 350px;">
+		<div class="col-md-3 my-2" *ngFor="let col of collections">
+			<a [routerLink]="['/restaurants/info']" [queryParams]="{cityID: cityID, collectionID: col.collection.collection_id}">
+				<div class="card text-center" style="height: 100%;">
+					<img src={{col.collection.image_url}} alt={{col.collection.title}} class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">{{col.collection.title}}</h5>
+						<p class="card-text">{{col.collection.description}}</p>
+					</div>
+				</div>
+			</a>
+		</div>	
+	</div>	
+</div>
+<div class="alert alert-warning" *ngIf="errMsg.length">
+	{{errMsg}}
+</div>
