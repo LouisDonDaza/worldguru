@@ -24,7 +24,7 @@ export class WeatherService {
   		.append('country', country)
   		.append('state', state)
 		.append('key', this.key);
-  		return this.httpClient.get(`http://api.airvisual.com/v2/city`,{
+  		return this.httpClient.get(`https://api.airvisual.com/v2/city`,{
   			params: params
   		});
   	}
