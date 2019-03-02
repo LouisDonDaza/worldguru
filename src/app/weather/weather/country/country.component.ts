@@ -106,15 +106,24 @@ export class CountryComponent implements OnInit, AfterContentInit {
   		"https://images.pexels.com/photos/533833/pexels-photo-533833.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/912364/pexels-photo-912364.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   	],
+    "03n":[
+      "https://images.pexels.com/photos/912364/pexels-photo-912364.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ],
   	"04d":[
   		"https://images.pexels.com/photos/1431822/pexels-photo-1431822.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   	],
+    "04n":[
+      "https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ],
   	"09d":[
   		"https://images.pexels.com/photos/763398/pexels-photo-763398.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/268941/pexels-photo-268941.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/459451/pexels-photo-459451.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   	],
+    "09n":[
+      "https://images.pexels.com/photos/459451/pexels-photo-459451.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ],
   	"10d":[
   		"https://images.pexels.com/photos/268791/pexels-photo-268791.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/125510/pexels-photo-125510.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
@@ -127,6 +136,9 @@ export class CountryComponent implements OnInit, AfterContentInit {
   		"https://images.pexels.com/photos/1162251/pexels-photo-1162251.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/53459/lightning-storm-weather-sky-53459.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   	],
+    "11n":[
+      "https://images.pexels.com/photos/1162251/pexels-photo-1162251.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ],
   	"13d":[
   		"https://images.pexels.com/photos/813872/pexels-photo-813872.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/839462/pexels-photo-839462.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -136,11 +148,14 @@ export class CountryComponent implements OnInit, AfterContentInit {
   		"https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/327308/pexels-photo-327308.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
   		"https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-  	]
+  	],
+    "50n":[
+      "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ]
   }
   getImgURL(icon: string){
   	const selectedIcon = this.imageURL[icon];
   	const rand = Math.floor(Math.random() * selectedIcon.length);
-  	return selectedIcon[rand];
+  	return selectedIcon[0];
   }
 }

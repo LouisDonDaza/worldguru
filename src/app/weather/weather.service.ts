@@ -1,5 +1,5 @@
 import {Subject} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -12,10 +12,21 @@ export class WeatherService {
   		return this.httpClient.get(`https://api.airvisual.com/v2/states?country=${country}&key=${this.key}`);
   	}
   	getCityfromState(state: string, country: string){
-  		return this.httpClient.get(`https://api.airvisual.com/v2/cities?state=${state}&country=${country}&key=${this.key}`);
+  		let params = new HttpParams().set('country', country)
+  		.append('state', state)
+		.append('key', this.key);
+  		return this.httpClient.get(`https://api.airvisual.com/v2/cities`, {
+  			params: params
+  		});
   	}
   	getData(city: string, state: string, country: string){
-  		return this.httpClient.get(`https://api.airvisual.com/v2/city?city=${city}&state=${state}&country=${country}&key=${this.key}`);
+  		let params = new HttpParams().set('city', city)
+  		.append('country', country)
+  		.append('state', state)
+		.append('key', this.key);
+  		return this.httpClient.get(`http://api.airvisual.com/v2/city`,{
+  			params: params
+  		});
   	}
   	countries: Object[] = [
     {name: "Afghanistan", url: "https://cdn.airvisual.net/flags/afghanistan.jpg"},

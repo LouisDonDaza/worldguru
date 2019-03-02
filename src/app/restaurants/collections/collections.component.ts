@@ -16,6 +16,7 @@ export class CollectionsComponent implements OnInit {
   ngOnInit() {
   	this.route.queryParams.subscribe(
   		(params: Params)=>{
+        this.cityEntered = params['city'] || "";
   			this.cityID = +params['cityID'] || 0;
   		}
   		)

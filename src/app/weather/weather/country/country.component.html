@@ -55,7 +55,7 @@
 		</div>
 	</div>
 	<div class="alert alert-warning" role="alert" *ngIf="errorMsg.length">{{errorMsg}}</div>
-	<div *ngIf="selectedCity.length" class="card text-center" style="margin: 0 auto; max-width: 400px;">
+	<div *ngIf="selectedCity.length && !errorMsg.length" class="card text-center" style="margin: 0 auto; max-width: 400px;">
 		<img src={{getImgURL(cityData.weather.ic)}} class="card-img-top" alt="...">
 		<div class="card-body">
 			<h3 class="card-title">

@@ -9,7 +9,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-md-4 my-2" *ngFor="let city of querySuggestions">
-			<a [routerLink]="['/restaurants/collections']" [queryParams]="{cityID: city.id}" (click)="onSelectCity(city.id)">
+			<a [routerLink]="['/restaurants/collections']" [queryParams]="{cityID: city.id, city: city.name}" (click)="onSelectCity(city.id)">
 				<img src={{city.country_flag_url}} alt={{city.name}} style="height: 25px;">
 				{{city.name}}
 			</a>
@@ -17,7 +17,7 @@
 	</div>
 </div>
 <div class="my-3" *ngIf="cityID">
-	<h4>Choose your type of Restaurant from a Collection</h4>
+	<h4>Here is a collection of Restaurants for {{cityEntered}}</h4>
 	<hr>
 	<div class="row" style="overflow-y: scroll; height: 350px;">
 		<div class="col-md-3 my-2" *ngFor="let col of collections">
